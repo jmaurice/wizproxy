@@ -1,0 +1,4 @@
+#!/usr/bin/zsh
+sl() { wget -q -O /dev/stdout http://www.sa-blacklist.stearns.org/sa-blacklist/sa-blacklist.current.domains || exit 1 }
+(echo "DELETE FROM ProxyBlackList;";sl|sed -e "s/^/INSERT INTO ProxyBlackList(ProxyBlackListHost) VALUE (\'/" -e "s/$/');/")|\
+mysql -u stearns -p Proxy
